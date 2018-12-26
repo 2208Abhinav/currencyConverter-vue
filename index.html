@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <title>Currency Converter</title>
+    <style>
+        * {
+            border-radius: 0 !important;
+        }
+        body {
+            background-color:#E7F7F9;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>From</label>
+                    <select v-model="from" class="form-control">
+                        <option :value="currency.id" v-for="currency in formattedCurrencies">
+                            {{ currency.currencyName }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label>To</label>
+                    <select v-model="to" class="form-control">
+                        <option :value="currency.id" v-for="currency in formattedCurrencies">
+                            {{ currency.currencyName }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <input v-model="amount" type="text" placeholder="Amount" class="from-control my-5">
+                    <div class="text-center">
+                        <button :disabled="disabled" v-on:click="convertCurrency()" class="btn btn-lg btn-primary">
+                            {{ loading ? 'Converting...' : 'Convert' }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <h1 class="text-center display-2 mt-5">{{ calculateResult }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
